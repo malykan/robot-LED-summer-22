@@ -12,7 +12,7 @@
   - LED connected from digital pin 9 to ground through 220 ohm resistor
 
   created 29 Dec. 2008
-  modified 9 Apr 2012
+  modified 25 July 2022
   by Tom Igoe
 
   This example code is in the public domain.
