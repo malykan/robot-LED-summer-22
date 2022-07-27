@@ -1,30 +1,30 @@
 // Include the library
 #include <Servo.h>
+#include "testLibrary.h"
 
+#define N 6000 //just for define syntax example
 // Create the servo object
-Servo myservo;
-int servoPinOut = 5;
+Servo servoLeft;
+int servoPinOutLeft = 4;
 
+Servo servoRight;
+int servoPinOutRight = 5;
+
+const int windingTime =2600; // milliseconds
+const int restingTime = 1500; // milliseconds 
+const double unwindingRatio = 0.72;
 // Setup section to run once
 void setup() {
-  myservo.attach(servoPinOut); // attach the servo to our servo object
+  servoLeft.attach(servoPinOutLeft); // attach the servo to our servo object
+  servoRight.attach(servoPinOutRight); // attach the servo to our servo object
+
   //Serial.begin(9600);
-  myservo.write(90); 
+  servoLeft.write(90); 
 }
 
 // Loop to keep the motor turning!
 void loop() {
-  //analogWrite(analogOutPin, outputValue);
-  myservo.write(65); // rotate the motor counterclockwise
-  //analogWrite(2, 240);
-  delay(8000); // keep rotating for 5 seconds (5000 milliseconds)
-  //analogWrite(2, 0);
-  myservo.write(90); // stop the motor
-  //analogWrite(1, 200);
-  delay(5000); // stay stopped
-  //analogWrite(1, 0);
-  myservo.write(115); // rotate the motor clockwise
-  //analogWrite(0, 200);
-  delay(8000); // keep rotating :D
-  //analogWrite(0, 0);
+  turningRoutine(servoLeft, windingTime, restingTime, unwindingRatio);
+  turningRoutine(servoRight, windingTime, restingTime, unwindingRatio);
+  contractionRoutine(servoLeft, servoRight, windingTime, restingTime, unwindingRatio);
 }
